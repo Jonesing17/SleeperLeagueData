@@ -36,7 +36,7 @@ def getLeagueIDs(userID, year = ""):
     if year == "":
         year = input("Enter year: ")
 
-    response = requests.get("https://api.sleeper.app/v1/user/"+userID+"/leagues/nfl/"+year+"/")    
+    response = requests.get("https://api.sleeper.app/v1/user/"+userID+"/leagues/nfl/"+str(year)+"/")    
     if ((response.status_code == 200)):
         leagueID = []
         leagues = response.json()
@@ -55,8 +55,9 @@ def getLeagueNames(leagueIDs):
     leagueNames = []
     leagueYears = []
     for i in range(0, len(leagueIDs)):
+        print('test1')
         response = requests.get("https://api.sleeper.app/v1/league/"+leagueIDs.loc[i][0])    
-  
+        print('test2')
         if response.status_code == 200:
             ##leagueNames = numpy.append(leagueNames, response.json()["name"])
             leagueNames.append(response.json()["name"])

@@ -12,14 +12,19 @@ import MatchupStats as ms
 
 
 """
-From username
-Get all leagues for that year
-Hardcoded to get the league ID for Rock Bottom 
-CONSIDER: Pick the league you want 
-"""
-###
+Enter a username
 
-##TODO - Remove comment so it requests a username
+Enter the years that you want
+
+Get all leagues for that year
+
+Ask which of those leagues that you want to retrieve'
+
+Retrieve 
+
+
+"""
+
 username = input("Enter your username: ") 
 userID = sleeper.getUserID(username= username)
 
@@ -32,19 +37,77 @@ while True:
         print("Invalid input. Try again.")
 
 
-Years = []
+
+startYear = 0
+endYear = 0
+isInt = False
+
 if multipleYears == "Y":
-    startYear = input("What is the first year you'd like to receive? (4-digit year) :")
 
-    if (len(start ==4) and int())
+    while isInt == False:
+        startYear = input("What is the first year you'd like to retrieve? (4-digit year) :")
+    
+        try:
+            if(isinstance(int(startYear), int) and len(startYear) == 4):
+                isInt = True
+                startYear = int(startYear)
+        except:
+            print("Value entered isn't a valid year: "+startYear)
+                
+    isInt = False
+    while isInt == False:        
+        endYear = input("What is the last year you'd like to retrieve? (4-digit year) :")
+    
+        try:
+            if(isinstance(int(endYear), int) and len(endYear) == 4):
+                isInt = True
+                endYear = int(endYear)
+        except:
+            print("Value entered isn't a valid year: "+endYear)            
+else:
+    
+    while isInt == False:
+        startYear = input("What year would you like to retrieve? (4-digit year) :")
+ 
+        try:
+            if(isinstance(int(startYear), int) and len(startYear) == 4):
+                isInt = True
+                startYear = int(startYear)
+        except:
+            print("Value entered isn't a valid year: "+startYear)
 
-year = "2024"
+del isInt   #no longer need isInt
+
+
+#TODO any thresholds on years?
+
+if endYear == 0:
+    years = [startYear]    
+else:
+    if (startYear > endYear):
+        tempYear = startYear
+        startYear = endYear
+        endYear = tempYear
+        del tempYear
+    years = list(range(startYear, endYear+1))
+
+del startYear #no longer need startYear 
+del endYear #no longer need endYear  
+del multipleYears
+
+print(years)
+
 week = 0
 
-##CONSIDER if userID is invalid, throw exceptions  
+
+#TODO
+startWeek = 1 
+##endWeek = playoff_week_start -1
+
+for year in years:
+    userLeagues = sleeper.getLeagueIDs(userID, year = year)
 
 
-userLeagues = sleeper.getLeagueIDs(userID, year = year)
 
 if (len(userLeagues)<=0):
     raise SystemExit("Error: No Valid Leagues.")
@@ -65,7 +128,7 @@ del i
 Using userLeagueRow and userLeague
 Build the roster for that league, in that year
 """
-leagueRoster = sleeper.buildLeagueRoster(leagueID = userLeagues.loc[userLeagueRow][0]) 
+leagueRoster = sleeper.buildLeagueRoster(leagueID = userLeagues.loc[userLeagueRow][0])
 
 """
 Using userLeagueRow and userLeague
