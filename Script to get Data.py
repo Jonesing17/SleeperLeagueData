@@ -7,7 +7,7 @@ Created on Fri Sep  5 21:06:26 2025
 
 import ImportSleeperData as sleeper
 import MatchupStats as ms
-
+import sys
 #import pandas
 
 
@@ -67,7 +67,7 @@ if multipleYears == "Y":
 else:
     
     while isInt == False:
-        startYear = input("What year would you like to retrieve? (4-digit year) :")
+        startYear = input("What year would you like to retrieve? (4-digit year): ")
  
         try:
             if(isinstance(int(startYear), int) and len(startYear) == 4):
@@ -95,7 +95,6 @@ del startYear #no longer need startYear
 del endYear #no longer need endYear  
 del multipleYears
 
-print(years)
 
 week = 0
 
@@ -110,25 +109,42 @@ for year in years:
 
 
 if (len(userLeagues)<=0):
-    raise SystemExit("Error: No Valid Leagues.")
+    sys.exit("Error: No Valid Leagues.")
 
 userLeagues = sleeper.getLeagueNames(leagueIDs = userLeagues)
 
-userLeagueRow = 1
+userLeagueRow = 0
 
 ##TODO - Present options for league
-##TODO - Request what league - Loop until valid
-for i in range(0, len(userLeagues)):
-    if(userLeagues.loc[i][1] == "Rock Bottom"):
-        userLeagueRow = i
-del i
+
+findLeagueName = True
+count = 0
+while (findLeagueName):
+    
+    print("League Options: "+str(userLeagues.loc[:, 'LeagueName'].tolist())+'\n')
+    leagueName = input("What league name would you like to retrieve?: ")
+    try:
+        userLeagueRow = userLeagues.loc[:, 'LeagueName'].tolist().index(leagueName)
+        findLeagueName = False
+    except:
+        count = count + 1
+        
+        if (count >=3):
+            sys.exit("Couldn't find valid league. Exiting after 3rd try")
+        else:
+            print("Invalid League Name.\n Try again...")
+
+del count
+del findLeagueName
+
+
 
 
 """
 Using userLeagueRow and userLeague
 Build the roster for that league, in that year
 """
-leagueRoster = sleeper.buildLeagueRoster(leagueID = userLeagues.loc[userLeagueRow][0])
+leagueRoster = sleeper.buildLeagueRoster(leagueID = userLeagues.loc[userLeagueRow, "LeagueID"])
 
 """
 Using userLeagueRow and userLeague
@@ -136,9 +152,10 @@ Build the schedule for that league, in that year
 """
 
 
-leagueMatchups = sleeper.buildLeagueMatchups(leagueID = userLeagues.loc[userLeagueRow][0], week = week)
+leagueMatchups = sleeper.buildLeagueMatchups(leagueID = userLeagues.loc[userLeagueRow, "LeagueID"], week = week)
 leagueMatchups.insert(0, "Year", [year]*len(leagueMatchups))
-        
+    
+  
 
 
 leagueMatchups = sleeper.pairOffMatchups(leagueMatchups, leagueRoster)
@@ -154,6 +171,9 @@ Build the transactions for that league, in that year
 """
 
 
+
+
+
 """
 Using userLeagueRow and userLeague
 Build the player output for that league, in that year
@@ -162,12 +182,6 @@ Build the player output for that league, in that year
 
 
 
-
-
-
-
-##TODO build a choice rather than hardcoding
-##primaryLeagueID = userLeagues2['RockBottom'][0]
 
 ##leagueRoster =
 ##getLeagueInfo

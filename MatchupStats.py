@@ -36,6 +36,6 @@ def standings(leagueMatchups, leagueRoster):
     leagueRoster['PF'] = pointsFor
     leagueRoster['PA'] = pointsAgainst
     
-    leagueRoster = leagueRoster.sort_values(by = ['Wins'], ascending = [False])
+    leagueRoster = leagueRoster.sort_values(by = ['Wins', 'PF'], ascending = [False, False])
 
     return leagueRoster

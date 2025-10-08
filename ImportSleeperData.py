@@ -55,9 +55,7 @@ def getLeagueNames(leagueIDs):
     leagueNames = []
     leagueYears = []
     for i in range(0, len(leagueIDs)):
-        print('test1')
-        response = requests.get("https://api.sleeper.app/v1/league/"+leagueIDs.loc[i][0])    
-        print('test2')
+        response = requests.get("https://api.sleeper.app/v1/league/"+leagueIDs.loc[i, 'LeagueID'])    
         if response.status_code == 200:
             ##leagueNames = numpy.append(leagueNames, response.json()["name"])
             leagueNames.append(response.json()["name"])
