@@ -1,0 +1,42 @@
+{
+  "merge_usernames": [
+    {
+      "canonical": "Hamnol",
+      "aliases": [
+        "NincompoopNolan",
+        "NolanHamill",
+        "TheGreatNolinho"
+      ]
+    }
+  ],
+  "score_corrections": [
+    {
+      "season": 2024,
+      "week": 13,
+      "display_name": "mhamill",
+      "corrected_score": -1.0,
+      "note": "J Taylor fumble added"
+    },
+    {
+      "season": 2023,
+      "week": 6,
+      "display_name": "MDTG",
+      "corrected_score": -1.0,
+      "note": "Dolphins defense fumbled? Stat correction was the opposite though"
+    },
+    {
+      "season": 2021,
+      "week": 8,
+      "display_name": "kjones17",
+      "corrected_score": -2.0,
+      "note": "Blocked kick (stat correction goes the other way)"
+    },
+    {
+      "season": 2020,
+      "week": 1,
+      "display_name": "nlimone88",
+      "corrected_score": -2.0,
+      "note": "No stat correction"
+    }
+  ]
+}
