@@ -553,14 +553,27 @@ def main():
     highlight_season = int(hl_season_input) if hl_season_input.isdigit() else None
     highlight_week   = int(hl_week_input)   if hl_week_input.isdigit()   else None
 
-    # Compute and export
+    # Report season/week for standings asterisk note
+    if highlight_season and highlight_week:
+        report_season, report_week = highlight_season, highlight_week
+    else:
+        all_seasons = get_seasons_list(clean_history)
+        if all_seasons:
+            rs    = all_seasons[-1]
+            weeks = sorted(int(w) for w in clean_history.get(str(rs), {}).get("weeks", {}).keys())
+            report_season = rs
+            report_week   = weeks[-1] if weeks else 1
+        else:
+            report_season, report_week = 0, 0
+
+    # Compute and export awards
     print("\n  Computing awards...")
     wt_filter = None if week_type == "all" else week_type
     all_wa    = compute_all_awards(clean_history)
     top       = find_top_n(all_wa, n=n, week_type_filter=wt_filter)
 
-    print("  Generating images...")
-    paths = save_award_images(
+    print("  Generating award images...")
+    award_paths = save_award_images(
         top_n_data       = top,
         season_filter    = season_filter,
         week_type        = week_type,
@@ -569,7 +582,17 @@ def main():
         n                = n,
     )
 
-    print(f"\n  {len(paths)} image(s) saved to data/exports/images/")
+    print("\n  Generating standings images...")
+    standings_paths = save_standings_images(
+        clean_history = clean_history,
+        week_type     = week_type,
+        report_season = report_season,
+        report_week   = report_week,
+    )
+
+    total = len(award_paths) + len(standings_paths)
+    print(f"\n  {len(award_paths)} award image(s) and {len(standings_paths)} standings image(s) saved.")
+    print(f"  {total} total image(s) in data/exports/images/")
 
 
 if __name__ == "__main__":
