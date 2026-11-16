@@ -39,9 +39,38 @@ from awards import compute_all_awards, find_top_n
 # Config
 # ---------------------------------------------------------------------------
 
-IMAGE_DIR    = os.path.join(os.path.dirname(__file__), "data", "exports", "images")
-FONT_REGULAR = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
-FONT_BOLD    = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
+from config import IMAGES_DIR, FONT_DIR, stamp
+
+IMAGE_DIR = str(IMAGES_DIR)   # images are written to docs/images/ at the repo root
+
+# Font search order: repo fonts/ folder first, then common system locations.
+# (Linux/GitHub runner, Windows, macOS.) Drop LiberationSans-Regular.ttf and
+# LiberationSans-Bold.ttf into a fonts/ folder to make this fully portable.
+_REGULAR_CANDIDATES = [
+    str(FONT_DIR / "LiberationSans-Regular.ttf"),
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "C:/Windows/Fonts/arial.ttf",
+    "/System/Library/Fonts/Supplemental/Arial.ttf",
+]
+_BOLD_CANDIDATES = [
+    str(FONT_DIR / "LiberationSans-Bold.ttf"),
+    "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    "C:/Windows/Fonts/arialbd.ttf",
+    "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+]
+
+
+def _first_existing(paths):
+    for p in paths:
+        if os.path.exists(p):
+            return p
+    return None
+
+
+FONT_REGULAR = _first_existing(_REGULAR_CANDIDATES)
+FONT_BOLD    = _first_existing(_BOLD_CANDIDATES)
 
 # ---------------------------------------------------------------------------
 # Colours
@@ -140,11 +169,15 @@ def entry_to_row(entry, rank: int) -> dict:
 
 def load_fonts(size_body: int = 13, size_header: int = 13, size_title: int = 18):
     try:
+        if not FONT_REGULAR or not FONT_BOLD:
+            raise OSError("no TrueType font found")
         f_regular = ImageFont.truetype(FONT_REGULAR, size_body)
         f_bold    = ImageFont.truetype(FONT_BOLD,    size_header)
         f_title   = ImageFont.truetype(FONT_BOLD,    size_title)
         f_desc    = ImageFont.truetype(FONT_REGULAR, 11)
     except Exception:
+        print("  [WARN] No TrueType font found - images will use a tiny default font. "
+              "Install fonts-liberation or add .ttf files to fonts/.")
         f_regular = ImageFont.load_default()
         f_bold    = f_regular
         f_title   = f_regular
@@ -294,7 +327,7 @@ def save_award_images(
     Generate and save one PNG per award. Returns list of saved file paths.
     """
     os.makedirs(image_dir, exist_ok=True)
-    timestamp   = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp   = stamp()
     season_tag  = str(season_filter) if season_filter else "all"
     saved_paths = []
 
@@ -452,6 +485,7 @@ def save_standings_images(
     week_type: str,
     report_season: int,
     report_week: int,
+    season_filter: Optional[int] = None,
     image_dir: str = IMAGE_DIR,
 ) -> list[str]:
     """
@@ -460,16 +494,17 @@ def save_standings_images(
       2. Second Lowest Winner + Second Highest Loser stacked
     """
     os.makedirs(image_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = stamp()
     note_text = f"Regular season games through Week {report_week} {report_season}"
-    subtitle  = f"All-Time  •  {week_type.replace('+', ' + ').title()}"
+    scope     = f"Season {season_filter}" if season_filter else "All-Time"
+    subtitle  = f"{scope}  •  {week_type.replace('+', ' + ').title()}"
     saved     = []
 
     # Image 1: Three standings stacked
     wide_tables = [
-        ("Standard Standings",   compute_standings(clean_history, week_type=week_type)),
-        ("Beat the Average",     compute_beat_average_standings(clean_history, week_type=week_type)),
-        ("Everyone vs Everyone", compute_schedules_against_everyone(clean_history, week_type=week_type)),
+        ("Standard Standings",   compute_standings(clean_history, season=season_filter, week_type=week_type)),
+        ("Beat the Average",     compute_beat_average_standings(clean_history, season=season_filter, week_type=week_type)),
+        ("Everyone vs Everyone", compute_schedules_against_everyone(clean_history, season=season_filter, week_type=week_type)),
     ]
     wide_imgs = [
         generate_standings_image(title, subtitle, data, STANDINGS_COLS_WIDE,
@@ -484,8 +519,8 @@ def save_standings_images(
 
     # Image 2: Second Lowest Winner + Second Highest Loser stacked
     count_tables = [
-        ("Second Lowest Winner", compute_second_lowest_winner(clean_history, week_type=week_type)),
-        ("Second Highest Loser", compute_second_highest_loser(clean_history, week_type=week_type)),
+        ("Second Lowest Winner", compute_second_lowest_winner(clean_history, season=season_filter, week_type=week_type)),
+        ("Second Highest Loser", compute_second_highest_loser(clean_history, season=season_filter, week_type=week_type)),
     ]
     count_imgs = [
         generate_standings_image(title, subtitle, data, STANDINGS_COLS_COUNT,
@@ -588,6 +623,7 @@ def main():
         week_type     = week_type,
         report_season = report_season,
         report_week   = report_week,
+        season_filter = season_filter,
     )
 
     total = len(award_paths) + len(standings_paths)

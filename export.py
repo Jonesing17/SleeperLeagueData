@@ -43,8 +43,9 @@ from history import (
 # Config
 # ---------------------------------------------------------------------------
 
-DEFAULT_HISTORY_PATH = os.path.join(os.path.dirname(__file__), "data", "history.json")
-EXPORT_DIR = os.path.join(os.path.dirname(__file__), "data", "exports")
+from config import HISTORY_PATH as DEFAULT_HISTORY_PATH, DOCS_DIR, stamp
+
+EXPORT_DIR = str(DOCS_DIR)   # Excel files are written to docs/ at the repo root
 
 # ---------------------------------------------------------------------------
 # Style helpers
@@ -714,7 +715,7 @@ def export_to_excel(
         build_awards_sheets(wb, top, scope=scope, week_type=week_type)
 
     # Filename
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = stamp()
     season_tag = str(season) if season else "all"
     filename = f"sleeper_export_{season_tag}_{week_type}_{timestamp}.xlsx"
     filepath = os.path.join(export_dir, filename)

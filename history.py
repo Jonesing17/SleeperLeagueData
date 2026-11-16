@@ -49,7 +49,7 @@ from sleeper_api import (
 # Config
 # ---------------------------------------------------------------------------
 
-DEFAULT_HISTORY_PATH = os.path.join(os.path.dirname(__file__), "data", "history.json")
+from config import HISTORY_PATH as DEFAULT_HISTORY_PATH, ask
 
 
 # ---------------------------------------------------------------------------
@@ -277,11 +277,18 @@ def _select_league(leagues: list, history: dict, season: int) -> Optional[dict]:
             if lg["league_id"] == stored_league_id:
                 return lg
 
-    # Prompt user to pick
+    # Unattended runs: pick by exact league name from SLEEPER_LEAGUE_NAME
+    wanted = os.environ.get("SLEEPER_LEAGUE_NAME", "").strip().lower()
+    if wanted:
+        matches = [lg for lg in leagues if lg["name"].strip().lower() == wanted]
+        if len(matches) == 1:
+            return matches[0]
+
+    # Prompt user to pick (raises an error when running non-interactively)
     print(f"  Multiple leagues found for {season}:")
     for i, lg in enumerate(leagues):
         print(f"    [{i}] {lg['name']}  (ID: {lg['league_id']})")
-    idx = input("  Select league number: ").strip()
+    idx = ask("  Select league number: ").strip()
     if idx.isdigit() and int(idx) < len(leagues):
         return leagues[int(idx)]
 

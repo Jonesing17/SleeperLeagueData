@@ -30,8 +30,7 @@ from copy import deepcopy
 # Config
 # ---------------------------------------------------------------------------
 
-DEFAULT_RULES_PATH = os.path.join(os.path.dirname(__file__), "data", "quality_rules.json")
-DEFAULT_HISTORY_PATH = os.path.join(os.path.dirname(__file__), "data", "history.json")
+from config import RULES_PATH as DEFAULT_RULES_PATH, HISTORY_PATH as DEFAULT_HISTORY_PATH
 
 
 # ---------------------------------------------------------------------------

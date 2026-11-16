@@ -8,8 +8,11 @@ Usage:
     python sleeper_api.py
 """
 
+import time
 import requests
 from typing import Optional
+
+from config import ask
 
 BASE_URL = "https://api.sleeper.app/v1"
 
@@ -21,12 +24,21 @@ BASE_URL = "https://api.sleeper.app/v1"
 def _get(endpoint: str) -> Optional[dict | list]:
     """Make a GET request to the Sleeper API. Returns parsed JSON or None on error."""
     url = f"{BASE_URL}{endpoint}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print(f"  [ERROR] {response.status_code} fetching: {url}")
-        return None
+    for attempt in range(1, 4):
+        try:
+            response = requests.get(url, timeout=30)
+        except requests.RequestException as exc:
+            print(f"  [WARN] {exc} fetching {url} (attempt {attempt}/3)")
+        else:
+            if response.status_code == 200:
+                return response.json()
+            if response.status_code not in (429, 500, 502, 503, 504):
+                print(f"  [ERROR] {response.status_code} fetching: {url}")
+                return None
+            print(f"  [WARN] {response.status_code} fetching {url} (attempt {attempt}/3)")
+        time.sleep(2 * attempt)
+    print(f"  [ERROR] giving up on {url}")
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -65,7 +77,7 @@ def get_playoff_start_week(league_id: str) -> int:
             return int(psw)
     print("  [WARN] Could not retrieve playoff_week_start from league settings.")
     while True:
-        user_input = input("  Enter the playoff start week manually: ").strip()
+        user_input = ask("  Enter the playoff start week manually: ").strip()
         if user_input.isdigit() and int(user_input) > 0:
             return int(user_input)
         print("  Please enter a valid week number (e.g. 14, 15, 16).")
