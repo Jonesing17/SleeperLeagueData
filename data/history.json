@@ -12383,6 +12383,696 @@
           }
         ],
         "byes": []
+      },
+      "4": {
+        "matchups": [
+          {
+            "matchup_id": 1,
+            "home": {
+              "roster_id": 9,
+              "owner_id": "522494706915913728",
+              "display_name": "GEJones96",
+              "team_name": "GEJones96",
+              "points": 230.54,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 8,
+              "owner_id": "468170369698623488",
+              "display_name": "kjones17",
+              "team_name": "kjones17",
+              "points": 121.3,
+              "playoff_status": "regular"
+            },
+            "winner": "GEJones96",
+            "margin": 109.24,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 2,
+            "home": {
+              "roster_id": 3,
+              "owner_id": "466736556246298624",
+              "display_name": "ricci12",
+              "team_name": "ricci12",
+              "points": 181.66,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 5,
+              "owner_id": "466737204945743872",
+              "display_name": "MDTG",
+              "team_name": "MDTG",
+              "points": 129.06,
+              "playoff_status": "regular"
+            },
+            "winner": "ricci12",
+            "margin": 52.6,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 3,
+            "home": {
+              "roster_id": 1,
+              "owner_id": "378699779485495296",
+              "display_name": "mhamill",
+              "team_name": "mhamill",
+              "points": 184.88,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 6,
+              "owner_id": "466976612370345984",
+              "display_name": "zstrock",
+              "team_name": "zstrock",
+              "points": 129.5,
+              "playoff_status": "regular"
+            },
+            "winner": "mhamill",
+            "margin": 55.38,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 4,
+            "home": {
+              "roster_id": 7,
+              "owner_id": "467746759183953920",
+              "display_name": "nlimone88",
+              "team_name": "nlimone88",
+              "points": 228.74,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 10,
+              "owner_id": "585520716477149184",
+              "display_name": "Hamnol",
+              "team_name": "Hamnol",
+              "points": 143.9,
+              "playoff_status": "regular"
+            },
+            "winner": "nlimone88",
+            "margin": 84.84,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 5,
+            "home": {
+              "roster_id": 4,
+              "owner_id": "466737079812878336",
+              "display_name": "CamelToeny",
+              "team_name": "CamelToeny",
+              "points": 184.2,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 2,
+              "owner_id": "380745034443718656",
+              "display_name": "msankey",
+              "team_name": "msankey",
+              "points": 182.04,
+              "playoff_status": "regular"
+            },
+            "winner": "CamelToeny",
+            "margin": 2.16,
+            "playoff_status": "regular"
+          }
+        ],
+        "byes": []
+      },
+      "5": {
+        "matchups": [
+          {
+            "matchup_id": 1,
+            "home": {
+              "roster_id": 9,
+              "owner_id": "522494706915913728",
+              "display_name": "GEJones96",
+              "team_name": "GEJones96",
+              "points": 157.84,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 3,
+              "owner_id": "466736556246298624",
+              "display_name": "ricci12",
+              "team_name": "ricci12",
+              "points": 156.04,
+              "playoff_status": "regular"
+            },
+            "winner": "GEJones96",
+            "margin": 1.8,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 2,
+            "home": {
+              "roster_id": 8,
+              "owner_id": "468170369698623488",
+              "display_name": "kjones17",
+              "team_name": "kjones17",
+              "points": 246.46,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 5,
+              "owner_id": "466737204945743872",
+              "display_name": "MDTG",
+              "team_name": "MDTG",
+              "points": 165.26,
+              "playoff_status": "regular"
+            },
+            "winner": "kjones17",
+            "margin": 81.2,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 3,
+            "home": {
+              "roster_id": 1,
+              "owner_id": "378699779485495296",
+              "display_name": "mhamill",
+              "team_name": "mhamill",
+              "points": 140.28,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 2,
+              "owner_id": "380745034443718656",
+              "display_name": "msankey",
+              "team_name": "msankey",
+              "points": 139.5,
+              "playoff_status": "regular"
+            },
+            "winner": "mhamill",
+            "margin": 0.78,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 4,
+            "home": {
+              "roster_id": 10,
+              "owner_id": "585520716477149184",
+              "display_name": "Hamnol",
+              "team_name": "Hamnol",
+              "points": 159.34,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 4,
+              "owner_id": "466737079812878336",
+              "display_name": "CamelToeny",
+              "team_name": "CamelToeny",
+              "points": 139.78,
+              "playoff_status": "regular"
+            },
+            "winner": "Hamnol",
+            "margin": 19.56,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 5,
+            "home": {
+              "roster_id": 7,
+              "owner_id": "467746759183953920",
+              "display_name": "nlimone88",
+              "team_name": "nlimone88",
+              "points": 233.78,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 6,
+              "owner_id": "466976612370345984",
+              "display_name": "zstrock",
+              "team_name": "zstrock",
+              "points": 131.92,
+              "playoff_status": "regular"
+            },
+            "winner": "nlimone88",
+            "margin": 101.86,
+            "playoff_status": "regular"
+          }
+        ],
+        "byes": []
+      },
+      "6": {
+        "matchups": [
+          {
+            "matchup_id": 1,
+            "home": {
+              "roster_id": 9,
+              "owner_id": "522494706915913728",
+              "display_name": "GEJones96",
+              "team_name": "GEJones96",
+              "points": 218.84,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 6,
+              "owner_id": "466976612370345984",
+              "display_name": "zstrock",
+              "team_name": "zstrock",
+              "points": 139.56,
+              "playoff_status": "regular"
+            },
+            "winner": "GEJones96",
+            "margin": 79.28,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 2,
+            "home": {
+              "roster_id": 2,
+              "owner_id": "380745034443718656",
+              "display_name": "msankey",
+              "team_name": "msankey",
+              "points": 121.26,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 5,
+              "owner_id": "466737204945743872",
+              "display_name": "MDTG",
+              "team_name": "MDTG",
+              "points": 110.8,
+              "playoff_status": "regular"
+            },
+            "winner": "msankey",
+            "margin": 10.46,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 3,
+            "home": {
+              "roster_id": 4,
+              "owner_id": "466737079812878336",
+              "display_name": "CamelToeny",
+              "team_name": "CamelToeny",
+              "points": 122.58,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 1,
+              "owner_id": "378699779485495296",
+              "display_name": "mhamill",
+              "team_name": "mhamill",
+              "points": 111.5,
+              "playoff_status": "regular"
+            },
+            "winner": "CamelToeny",
+            "margin": 11.08,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 4,
+            "home": {
+              "roster_id": 3,
+              "owner_id": "466736556246298624",
+              "display_name": "ricci12",
+              "team_name": "ricci12",
+              "points": 171.16,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 10,
+              "owner_id": "585520716477149184",
+              "display_name": "Hamnol",
+              "team_name": "Hamnol",
+              "points": 128.14,
+              "playoff_status": "regular"
+            },
+            "winner": "ricci12",
+            "margin": 43.02,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 5,
+            "home": {
+              "roster_id": 8,
+              "owner_id": "468170369698623488",
+              "display_name": "kjones17",
+              "team_name": "kjones17",
+              "points": 195.0,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 7,
+              "owner_id": "467746759183953920",
+              "display_name": "nlimone88",
+              "team_name": "nlimone88",
+              "points": 149.92,
+              "playoff_status": "regular"
+            },
+            "winner": "kjones17",
+            "margin": 45.08,
+            "playoff_status": "regular"
+          }
+        ],
+        "byes": []
+      },
+      "7": {
+        "matchups": [
+          {
+            "matchup_id": 1,
+            "home": {
+              "roster_id": 2,
+              "owner_id": "380745034443718656",
+              "display_name": "msankey",
+              "team_name": "msankey",
+              "points": 192.34,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 9,
+              "owner_id": "522494706915913728",
+              "display_name": "GEJones96",
+              "team_name": "GEJones96",
+              "points": 163.94,
+              "playoff_status": "regular"
+            },
+            "winner": "msankey",
+            "margin": 28.4,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 2,
+            "home": {
+              "roster_id": 4,
+              "owner_id": "466737079812878336",
+              "display_name": "CamelToeny",
+              "team_name": "CamelToeny",
+              "points": 155.12,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 5,
+              "owner_id": "466737204945743872",
+              "display_name": "MDTG",
+              "team_name": "MDTG",
+              "points": 143.08,
+              "playoff_status": "regular"
+            },
+            "winner": "CamelToeny",
+            "margin": 12.04,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 3,
+            "home": {
+              "roster_id": 7,
+              "owner_id": "467746759183953920",
+              "display_name": "nlimone88",
+              "team_name": "nlimone88",
+              "points": 224.72,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 1,
+              "owner_id": "378699779485495296",
+              "display_name": "mhamill",
+              "team_name": "mhamill",
+              "points": 113.98,
+              "playoff_status": "regular"
+            },
+            "winner": "nlimone88",
+            "margin": 110.74,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 4,
+            "home": {
+              "roster_id": 10,
+              "owner_id": "585520716477149184",
+              "display_name": "Hamnol",
+              "team_name": "Hamnol",
+              "points": 167.88,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 8,
+              "owner_id": "468170369698623488",
+              "display_name": "kjones17",
+              "team_name": "kjones17",
+              "points": 134.18,
+              "playoff_status": "regular"
+            },
+            "winner": "Hamnol",
+            "margin": 33.7,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 5,
+            "home": {
+              "roster_id": 3,
+              "owner_id": "466736556246298624",
+              "display_name": "ricci12",
+              "team_name": "ricci12",
+              "points": 188.5,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 6,
+              "owner_id": "466976612370345984",
+              "display_name": "zstrock",
+              "team_name": "zstrock",
+              "points": 94.44,
+              "playoff_status": "regular"
+            },
+            "winner": "ricci12",
+            "margin": 94.06,
+            "playoff_status": "regular"
+          }
+        ],
+        "byes": []
+      },
+      "8": {
+        "matchups": [
+          {
+            "matchup_id": 1,
+            "home": {
+              "roster_id": 4,
+              "owner_id": "466737079812878336",
+              "display_name": "CamelToeny",
+              "team_name": "CamelToeny",
+              "points": 194.34,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 9,
+              "owner_id": "522494706915913728",
+              "display_name": "GEJones96",
+              "team_name": "GEJones96",
+              "points": 184.24,
+              "playoff_status": "regular"
+            },
+            "winner": "CamelToeny",
+            "margin": 10.1,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 2,
+            "home": {
+              "roster_id": 7,
+              "owner_id": "467746759183953920",
+              "display_name": "nlimone88",
+              "team_name": "nlimone88",
+              "points": 182.16,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 5,
+              "owner_id": "466737204945743872",
+              "display_name": "MDTG",
+              "team_name": "MDTG",
+              "points": 116.66,
+              "playoff_status": "regular"
+            },
+            "winner": "nlimone88",
+            "margin": 65.5,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 3,
+            "home": {
+              "roster_id": 8,
+              "owner_id": "468170369698623488",
+              "display_name": "kjones17",
+              "team_name": "kjones17",
+              "points": 178.28,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 1,
+              "owner_id": "378699779485495296",
+              "display_name": "mhamill",
+              "team_name": "mhamill",
+              "points": 114.0,
+              "playoff_status": "regular"
+            },
+            "winner": "kjones17",
+            "margin": 64.28,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 4,
+            "home": {
+              "roster_id": 10,
+              "owner_id": "585520716477149184",
+              "display_name": "Hamnol",
+              "team_name": "Hamnol",
+              "points": 159.26,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 6,
+              "owner_id": "466976612370345984",
+              "display_name": "zstrock",
+              "team_name": "zstrock",
+              "points": 151.84,
+              "playoff_status": "regular"
+            },
+            "winner": "Hamnol",
+            "margin": 7.42,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 5,
+            "home": {
+              "roster_id": 3,
+              "owner_id": "466736556246298624",
+              "display_name": "ricci12",
+              "team_name": "ricci12",
+              "points": 185.28,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 2,
+              "owner_id": "380745034443718656",
+              "display_name": "msankey",
+              "team_name": "msankey",
+              "points": 135.72,
+              "playoff_status": "regular"
+            },
+            "winner": "ricci12",
+            "margin": 49.56,
+            "playoff_status": "regular"
+          }
+        ],
+        "byes": []
+      },
+      "9": {
+        "matchups": [
+          {
+            "matchup_id": 1,
+            "home": {
+              "roster_id": 9,
+              "owner_id": "522494706915913728",
+              "display_name": "GEJones96",
+              "team_name": "GEJones96",
+              "points": 218.24,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 7,
+              "owner_id": "467746759183953920",
+              "display_name": "nlimone88",
+              "team_name": "nlimone88",
+              "points": 185.08,
+              "playoff_status": "regular"
+            },
+            "winner": "GEJones96",
+            "margin": 33.16,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 2,
+            "home": {
+              "roster_id": 6,
+              "owner_id": "466976612370345984",
+              "display_name": "zstrock",
+              "team_name": "zstrock",
+              "points": 110.96,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 5,
+              "owner_id": "466737204945743872",
+              "display_name": "MDTG",
+              "team_name": "MDTG",
+              "points": 105.02,
+              "playoff_status": "regular"
+            },
+            "winner": "zstrock",
+            "margin": 5.94,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 3,
+            "home": {
+              "roster_id": 3,
+              "owner_id": "466736556246298624",
+              "display_name": "ricci12",
+              "team_name": "ricci12",
+              "points": 158.34,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 1,
+              "owner_id": "378699779485495296",
+              "display_name": "mhamill",
+              "team_name": "mhamill",
+              "points": 149.6,
+              "playoff_status": "regular"
+            },
+            "winner": "ricci12",
+            "margin": 8.74,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 4,
+            "home": {
+              "roster_id": 2,
+              "owner_id": "380745034443718656",
+              "display_name": "msankey",
+              "team_name": "msankey",
+              "points": 205.66,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 10,
+              "owner_id": "585520716477149184",
+              "display_name": "Hamnol",
+              "team_name": "Hamnol",
+              "points": 90.84,
+              "playoff_status": "regular"
+            },
+            "winner": "msankey",
+            "margin": 114.82,
+            "playoff_status": "regular"
+          },
+          {
+            "matchup_id": 5,
+            "home": {
+              "roster_id": 4,
+              "owner_id": "466737079812878336",
+              "display_name": "CamelToeny",
+              "team_name": "CamelToeny",
+              "points": 169.6,
+              "playoff_status": "regular"
+            },
+            "away": {
+              "roster_id": 8,
+              "owner_id": "468170369698623488",
+              "display_name": "kjones17",
+              "team_name": "kjones17",
+              "points": 168.48,
+              "playoff_status": "regular"
+            },
+            "winner": "CamelToeny",
+            "margin": 1.12,
+            "playoff_status": "regular"
+          }
+        ],
+        "byes": []
       }
     }
   }
