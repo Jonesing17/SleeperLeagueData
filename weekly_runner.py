@@ -19,7 +19,7 @@ Run unattended (GitHub Actions):
 Inputs (command-line argument, else environment variable, else prompt):
     --username      SLEEPER_USERNAME     Sleeper username (required)
     --week          SLEEPER_WEEK         auto | 14 | 2025-14   (default: auto)
-    --week-type     SLEEPER_WEEK_TYPE    regular | playoff | regular+playoff | all (default: all)
+    --week-type     SLEEPER_WEEK_TYPE    regular | playoff | regular+playoff | all (default: regular)
     SLEEPER_LEAGUE_NAME                  only needed if you are in several leagues in a new season
 """
 
@@ -297,7 +297,7 @@ def parse_args(argv=None):
     p.add_argument("--week", default=os.environ.get("SLEEPER_WEEK"),
                    help="auto | 14 | 2025-14  (env: SLEEPER_WEEK). auto = last completed week")
     p.add_argument("--week-type", choices=WEEK_TYPES, default=os.environ.get("SLEEPER_WEEK_TYPE"),
-                   help="which weeks to include (env: SLEEPER_WEEK_TYPE, default: all)")
+                   help="which weeks to include (env: SLEEPER_WEEK_TYPE, default: regular)")
     p.add_argument("--top-n", type=int, default=15, help="rows per award (default 15)")
     p.add_argument("--non-interactive", action="store_true",
                    help="never prompt; fail if an input is missing (implied by CI=true)")
@@ -340,9 +340,9 @@ def main(argv=None) -> int:
         print("    [1] Regular season only\n    [2] True playoffs only")
         print("    [3] Regular season + true playoffs\n    [4] All weeks")
         week_type = {"1": "regular", "2": "playoff", "3": "regular+playoff", "4": "all"}.get(
-            input("  Select [4]: ").strip(), "all")
+            input("  Select [1]: ").strip(), "regular")
     else:
-        week_type = "all"
+        week_type = "regular"
 
     # ---- current state from Sleeper ----
     print("\n  Fetching current NFL state...")
@@ -390,12 +390,23 @@ def main(argv=None) -> int:
     clean_history, changes = apply_all_rules(raw_history, rules)
     print(f"  {sum(len(v) for v in changes.values())} data-quality rule change(s) applied.")
 
+    # The footnote reads "regular season games through Week N", so never let it
+    # name a playoff week. (Highlighting still uses the real report week.)
+    psw = clean_history.get(str(season), {}).get("playoff_start_week")
+    note_week = min(report_week, psw - 1) if (week_type == "regular" and psw) else report_week
+
+    # Published files use stable *_latest names; clear last run's so that switching
+    # week type never leaves stale files on the page. (Runs only after history succeeded.)
+    if os.environ.get("SLEEPER_STABLE_NAMES"):
+        for old in [*DOCS_DIR.glob("*_latest.xlsx"), *DOCS_DIR.glob("images/*_latest.png")]:
+            old.unlink()
+
     # ---- Excel ----
     print("\n  Exporting to Excel...")
     filepath = export_to_excel(
         clean_history, season=None, week_type=week_type,
         include_awards=True, top_n=args.top_n,
-        report_season=season, report_week=report_week,
+        report_season=season, report_week=note_week,
     )
     print(f"  Exported: {filepath}")
 
@@ -420,9 +431,16 @@ def main(argv=None) -> int:
         top_n_data=top, season_filter=None, week_type=week_type,
         highlight_season=season, highlight_week=report_week, n=args.top_n,
     )
+    # All-time standings images (unchanged)
     standings_paths = save_standings_images(
         clean_history=clean_history, week_type=week_type,
-        report_season=season, report_week=report_week, season_filter=None,
+        report_season=season, report_week=note_week, season_filter=None,
+    )
+    # Current-season standings images: alternate standings + second lowest winner /
+    # second highest loser, limited to the season being reported on
+    standings_paths += save_standings_images(
+        clean_history=clean_history, week_type=week_type,
+        report_season=season, report_week=note_week, season_filter=season,
     )
 
     # ---- summary + web page ----

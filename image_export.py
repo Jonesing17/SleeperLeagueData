@@ -512,7 +512,8 @@ def save_standings_images(
         for i, (title, data) in enumerate(wide_tables)
     ]
     combined_wide = stack_images_vertically(wide_imgs)
-    path1 = os.path.join(image_dir, f"standings_combined_{timestamp}.png")
+    season_part = f"_{season_filter}" if season_filter else ""   # keeps season files separate from all-time
+    path1 = os.path.join(image_dir, f"standings_combined{season_part}_{timestamp}.png")
     combined_wide.save(path1, "PNG")
     saved.append(path1)
     print(f"  Saved: {path1}")
@@ -528,7 +529,7 @@ def save_standings_images(
         for i, (title, data) in enumerate(count_tables)
     ]
     combined_count = stack_images_vertically(count_imgs)
-    path2 = os.path.join(image_dir, f"second_high_low_combined_{timestamp}.png")
+    path2 = os.path.join(image_dir, f"second_high_low_combined{season_part}_{timestamp}.png")
     combined_count.save(path2, "PNG")
     saved.append(path2)
     print(f"  Saved: {path2}")
@@ -573,9 +574,9 @@ def main():
     print("    [2] True playoffs only")
     print("    [3] Regular season + true playoffs")
     print("    [4] All weeks")
-    wt_choice = input("  Select [4]: ").strip()
+    wt_choice = input("  Select [1]: ").strip()
     wt_map    = {"1": "regular", "2": "playoff", "3": "regular+playoff", "4": "all"}
-    week_type = wt_map.get(wt_choice, "all")
+    week_type = wt_map.get(wt_choice, "regular")
 
     # Number of rows
     n_input = input("\n  Rows per award [10]: ").strip()

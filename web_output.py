@@ -8,6 +8,7 @@ Writes the files GitHub Pages serves from docs/:
 """
 
 import html
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -55,8 +56,25 @@ def _image_files() -> list:
     files = sorted(IMAGES_DIR.glob("*.png"))
     latest = [f for f in files if f.stem.endswith("_latest")]
     files = latest or files                      # prefer the stable weekly files
-    first = ("standings_combined", "second_high_low_combined")
-    return sorted(files, key=lambda f: (not f.name.startswith(first), f.name))
+    def order(f):
+        group = (0 if f.name.startswith("standings_combined")
+                 else 1 if f.name.startswith("second_high_low_combined") else 2)
+        has_year = bool(re.search(r"_\d{4}_", f.name))      # season files after all-time
+        return (group, has_year, f.name)
+    return sorted(files, key=order)
+
+
+def _caption(f: Path) -> str:
+    name = f.stem.removesuffix("_latest")
+    m = re.search(r"_(\d{4})$", name)
+    scope = f"{m.group(1)} season" if m else "all-time"
+    if m:
+        name = name[: m.start()]
+    if name.startswith(("standings_combined", "second_high_low_combined")):
+        title = "Standings" if name.startswith("standings") else "Second Lowest Winner / Second Highest Loser"
+        return f"{title} - {scope}"
+    name = re.sub(r"_(?:all|\d{4})_[a-z+]+$", "", name)   # drop scope/week-type suffix
+    return name.replace("_", " ").title()
 
 
 def write_site(
@@ -73,7 +91,7 @@ def write_site(
     (DOCS_DIR / "summary.txt").write_text(summary, encoding="utf-8")
 
     imgs = "\n".join(
-        f'<figure><img src="images/{html.escape(f.name)}" alt="{html.escape(f.stem)}" loading="lazy"></figure>'
+        f'<figure><figcaption>{html.escape(_caption(f))}</figcaption><img src="images/{html.escape(f.name)}" alt="{html.escape(_caption(f))}" loading="lazy"></figure>'
         for f in _image_files()
     )
     xlsx = ""
