@@ -1,0 +1,52 @@
+name: Weekly league update
+
+on:
+  schedule:
+    - cron: "0 14 * * 2"        # Tuesdays 14:00 UTC (morning in the US)
+  workflow_dispatch:             # manual "Run workflow" button
+    inputs:
+      force:
+        description: "Run even if the NFL season is not active"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: weekly-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .     # change to your scripts' folder name if they are not at the repo root
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: "**/requirements.txt"
+
+      - name: Install fonts for the images
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-liberation
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run weekly update
+        env:
+          SLEEPER_USERNAME: ${{ vars.SLEEPER_USERNAME }}
+        run: python weekly_runner.py --week auto --non-interactive ${{ inputs.force && '--force' || '' }}
+
+      - name: Commit results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "Weekly update $(date -u +%F)"
+          git push
