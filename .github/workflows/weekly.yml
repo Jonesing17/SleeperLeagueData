@@ -2,7 +2,8 @@ name: Weekly league update
 
 on:
   schedule:
-    - cron: "0 14 * * 2"        # Tuesdays 14:00 UTC (morning in the US)
+    - cron: "17 12 * * 2,3"        # Tuesdays 12:00 EST/EDT
+      timezone: "America/NewYork"
   workflow_dispatch:             # manual "Run workflow" button
     inputs:
       force:
